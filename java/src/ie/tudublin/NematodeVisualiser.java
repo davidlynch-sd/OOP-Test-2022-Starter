@@ -29,13 +29,18 @@ public class NematodeVisualiser extends PApplet
 	AudioPlayer tunage;
 	ArrayList<Nematode> nemas = new ArrayList<Nematode>(); 
 
+	int index = 0;
 
 	public void keyPressed()
 	{		
 		if (keyCode == LEFT)
 		{
-
+			index--;
 		}		
+		if (keyCode == RIGHT)
+		{
+			index++;
+		}
 	}
 
 
@@ -57,13 +62,26 @@ public class NematodeVisualiser extends PApplet
 		colorMode(HSB);
 		background(0);
 		smooth();				
+		textSize(100);
+		textAlign(CENTER);
 	}
 	
 	public void draw()
-	{	
+	{
+		if(index > nemas.size() - 1)
+		{
+			index = 0;
+		}
+		if(index < 0)
+		{
+			index = nemas.size() -1;
+		}
 		background(0);
-		Nematode n = nemas.get(0);
+		Nematode n = nemas.get(index);
+
 		n.render(this,tunage);
+		fill(255);	
+		text(n.name,width/2,height/5);
 	}
 	
 	//Loads the todes :D
