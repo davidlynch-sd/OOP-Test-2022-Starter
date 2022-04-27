@@ -50,7 +50,6 @@ public class Nematode
 			float LimbLen = 20;
 			float yPos = 0;
 
-			pa.stroke(255);
 			if(LikesDancing)
 			{
 				float time = pa.frameCount%60;
@@ -73,14 +72,14 @@ public class Nematode
 
 				float stemX = startX - (rad * pa.cos(rootAng));
 				float stemY = startY -(rad/2 * pa.sin(rootAng));
-				float nubX = startX - (StalkLen * pa.cos(rootAng));
+				float nubX = startX - (StalkLen * pa.cos(rootAng + theta));
 				float nubY = startY - (StalkLen * pa.sin(rootAng));
 
 				pa.line(stemX,stemY,nubX,nubY);
 				pa.line(pa.width-stemX,stemY,pa.width-nubX,nubY);
 				pa.fill(0);
 				pa.ellipse(nubX,nubY,10,10);
-				pa.ellipse(-nubX,nubY,10,10);
+				pa.ellipse(pa.width-nubX,nubY,10,10);
 			}
 
 			for(int i = 0; i < length; i++)
@@ -104,20 +103,20 @@ public class Nematode
 			{
 				case 'h':
 				{	
-					pa.stroke(255);
 					pa.ellipse(startX,yPos,rad/2,rad/2);
+				
+					pa.line(startX,yPos + rad/2,startX,yPos + rad/2 + LimbLen);
+					pa.ellipse(startX,yPos + rad/2 + LimbLen,rad/2,rad/2);
 					break;
 				}
 				case 'm':
 				{
-					pa.stroke(255);
 					pa.line(startX,yPos + rad/2,startX,yPos + rad/2 + LimbLen);
 					pa.ellipse(startX,yPos + rad/2 + LimbLen,rad/2,rad/2);
 					break;
 				}
 				case 'f':
 				{
-					pa.stroke(255);
 					pa.ellipse(startX,yPos,rad/2,rad/2);
 					break;
 				}

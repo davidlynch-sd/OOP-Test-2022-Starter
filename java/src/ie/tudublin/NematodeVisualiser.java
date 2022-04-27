@@ -59,9 +59,11 @@ public class NematodeVisualiser extends PApplet
 
 		tunage.play();
 		loadNematodes();
+
 		colorMode(HSB);
 		background(0);
-		smooth();				
+		smooth();
+		strokeWeight(4);
 		textSize(100);
 		textAlign(CENTER);
 	}
@@ -77,8 +79,16 @@ public class NematodeVisualiser extends PApplet
 			index = nemas.size() -1;
 		}
 		background(0);
+		stroke(map(index,0,nemas.size()-1,0,255),255,255);
 		Nematode n = nemas.get(index);
 
+		line(20,height/2,width/4,height/2);
+		line(20,height/2,width/8,height/3);
+		line(20,height/2,width/8,2*height/3);
+
+		line(width-20,height/2,width-width/4,height/2);
+		line(width-20,height/2,width-width/8,height/3);
+		line(width-20,height/2,width-width/8,2*height/3);
 		n.render(this,tunage);
 		fill(255);	
 		text(n.name,width/2,height/5);
