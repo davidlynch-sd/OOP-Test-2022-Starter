@@ -1,3 +1,16 @@
+/*NAME : David Lynch
+ *STUDENT NO: C19500876
+ *
+ *Nematode Visualiser 
+ *
+ * Compiled using mcompile.sh
+ *
+ * OS: EndeavourOS
+ * 
+ */
+
+
+
 package ie.tudublin;
 
 import java.util.ArrayList;
@@ -9,10 +22,14 @@ import processing.data.TableRow;
 public class NematodeVisualiser extends PApplet
 {
 
+	ArrayList<Nematode> nemas = new ArrayList<Nematode>(); 
+
+
 	public void keyPressed()
 	{		
 		if (keyCode == LEFT)
 		{
+
 		}		
 	}
 
@@ -24,14 +41,22 @@ public class NematodeVisualiser extends PApplet
 
 	public void setup() 
 	{
+		loadNematodes();
 		colorMode(HSB);
 		background(0);
 		smooth();				
 	}
 	
-
+	//Loads the todes :D
 	public void loadNematodes()
 	{
+		Table table = loadTable("data/nematodes.csv","header");
+
+		for(TableRow row:table.rows())
+		{
+			Nematode n = new Nematode(row);
+			nemas.add(n);
+		}
 	}
 
 
