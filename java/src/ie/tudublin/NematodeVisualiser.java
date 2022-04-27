@@ -1,4 +1,5 @@
 /*NAME : David Lynch
+ *
  *STUDENT NO: C19500876
  *
  *Nematode Visualiser 
@@ -60,10 +61,9 @@ public class NematodeVisualiser extends PApplet
 	
 	public void draw()
 	{	
-		for(Nematode n: nemas)
-		{
-			n.render(this,tunage);
-		}
+		background(0);
+		Nematode n = nemas.get(0);
+		n.render(this,tunage);
 	}
 	
 	//Loads the todes :D

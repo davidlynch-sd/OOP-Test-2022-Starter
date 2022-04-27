@@ -39,18 +39,42 @@ public class Nematode
 		//Where the magic happens
 		public void render(PApplet pa, AudioPlayer ap)
 		{		
-			
+			pa.noFill();
 			//General use variables
 		
 			float startX = pa.width/2;
 			float startY = pa.height/2;
 			float rad = 30;
 
+			float LimbLen = 20;
+
+			float yPos = 0;
+			float theta = 0;
+
+			if(LikesDancing)
+			{
+				float time = pa.frameCount%60;
+				theta = pa.map(time,0,60,0,pa.PI);
+				ap.unmute();
+			}
+			else
+			{
+				ap.mute();
+			}
 			for(int i = 0; i < length; i++)
 			{
-				pa.noFill();
-				pa.stroke(pa.map(i,0,length,0,255),255,255);
-				pa.ellipse(startX,startY+(rad *i), rad,rad);	
+				pa.stroke(255);
+				yPos = startY + (rad*i);
+				if(limbs)
+				{
+					float limbX = pa.cos(theta) * LimbLen;
+					float limbY = pa.sin(theta) * LimbLen;
+					pa.line(startX-rad-limbX,yPos+limbY,startX - (rad/2), yPos); //left arm
+					pa.line(startX+rad+limbX,yPos+limbY,startX + (rad/2), yPos); //right arm
+				}
+
+
+				pa.ellipse(startX,yPos, rad,rad);	
 			}
 
 
@@ -64,14 +88,6 @@ public class Nematode
 
 			}
 			
-			if(LikesDancing)
-			{
-				ap.unmute();
-			}
-			else
-			{
-				ap.mute();
-			}
 
 
 
