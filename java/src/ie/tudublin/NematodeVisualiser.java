@@ -14,7 +14,8 @@
 package ie.tudublin;
 
 import java.util.ArrayList;
-
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.data.Table;
 import processing.data.TableRow;
@@ -22,6 +23,9 @@ import processing.data.TableRow;
 public class NematodeVisualiser extends PApplet
 {
 
+	Minim minim;
+	PApplet pa;
+	AudioPlayer tunage;
 	ArrayList<Nematode> nemas = new ArrayList<Nematode>(); 
 
 
@@ -41,10 +45,25 @@ public class NematodeVisualiser extends PApplet
 
 	public void setup() 
 	{
+
+		minim = new Minim(this);
+		tunage = minim.loadFile("data/singItBack.mp3",1024);
+
+		
+
+		tunage.play();
 		loadNematodes();
 		colorMode(HSB);
 		background(0);
 		smooth();				
+	}
+	
+	public void draw()
+	{	
+		for(Nematode n: nemas)
+		{
+			n.render(this,tunage);
+		}
 	}
 	
 	//Loads the todes :D
@@ -60,7 +79,4 @@ public class NematodeVisualiser extends PApplet
 	}
 
 
-	public void draw()
-	{	
-	}
 }
